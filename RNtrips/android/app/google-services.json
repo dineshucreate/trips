@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "38950871644",
+    "firebase_url": "https://fir-testing-2e25e.firebaseio.com",
+    "project_id": "fir-testing-2e25e",
+    "storage_bucket": "fir-testing-2e25e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38950871644:android:3a91e9e8767c3906",
+        "android_client_info": {
+          "package_name": "com.firebasecrashtesting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38950871644-94la8di53rgthnroh3mklad2c365rpj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYjLl9QIr_5h0JdF-cZwHCJ1sHUokR7gg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38950871644-94la8di53rgthnroh3mklad2c365rpj2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "38950871644-fgst2gt51udknph79d7o9ka2n9djvchl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.FirebaseCrashTesting"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38950871644:android:6bbc4b176d228a25",
+        "android_client_info": {
+          "package_name": "com.hooksexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38950871644-94la8di53rgthnroh3mklad2c365rpj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYjLl9QIr_5h0JdF-cZwHCJ1sHUokR7gg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38950871644-94la8di53rgthnroh3mklad2c365rpj2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "38950871644-fgst2gt51udknph79d7o9ka2n9djvchl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.FirebaseCrashTesting"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38950871644:android:6afeee3227a36084",
+        "android_client_info": {
+          "package_name": "com.rntrips"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38950871644-94la8di53rgthnroh3mklad2c365rpj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYjLl9QIr_5h0JdF-cZwHCJ1sHUokR7gg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38950871644-94la8di53rgthnroh3mklad2c365rpj2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "38950871644-fgst2gt51udknph79d7o9ka2n9djvchl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.FirebaseCrashTesting"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
