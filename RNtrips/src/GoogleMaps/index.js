@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Dimensions, PermissionsAndroid, StyleSheet, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, PermissionsAndroid, StyleSheet, Platform } from 'react-native';
 import { Input } from 'react-native-elements';
-import MapView, { PROVIDER_GOOGLE, Marker, MarkerAnimated } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Modal from 'react-native-modal';
+import Geocoder from 'react-native-geocoder';
+import SQLite from 'react-native-sqlite-storage';
 import VectorIcon from '../utils/vectorIcons';
 let { width, height } = Dimensions.get('window');
 
@@ -16,6 +18,10 @@ const HOME = {
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
 }
+
+const db = SQLite.openDatabase({ name: 'markers.db' });
+
+const TABLE_NAME = 'table_markers';
 
 class GoogleMaps extends React.Component {
 
@@ -33,7 +39,11 @@ class GoogleMaps extends React.Component {
             prevLatLng: {},
             address: '',
             markers: [],
+            latlngs: [],
             isLongPressed: false,
+            latlongTapped: {},
+            title: '',
+            description: '',
         };
     }
     getMapRegion = () => ({
@@ -84,7 +94,7 @@ class GoogleMaps extends React.Component {
 
 
     componentDidMount() {
-        PermissionsAndroid.request("android.permission.ACCESS_FINE_LOCATION").then((resp) => {
+        PermissionsAndroid.requestMultiple(["android.permission.ACCESS_FINE_LOCATION", 'android.permission.READ_EXTERNAL_STORAGE', 'android.permission.WRITE_EXTERNAL_STORAGE']).then((resp) => {
             console.log('Response ' + JSON.stringify(resp));
 
         }).catch((error) => console.log('error:  ' + error)
@@ -105,16 +115,157 @@ class GoogleMaps extends React.Component {
             (error) => console.log(error.message),
 
         );
+
+        this.fetchAllMarkers();
+
+    }
+    fitAllMarkers = () => {
+
+        console.log(">>>   " + JSON.stringify(this.state.latlngs));
+
+
+        if (this.state.latlngs.length > 0 && this.refs.map !== null) {
+            this.refs.map.fitToCoordinates([{ latitude: 33.9260206, longitude: 75.0173499 }, { latitude: 33.949817, longitude: 74.985655 }], {
+                edgePadding: 10,
+                animated: true,
+            });
+
+        }
     }
 
-    onMapLongPress = () => {
+    onMapLongPress = (event) => {
+        const latlng = event.nativeEvent.coordinate;
 
-        this.setState({ isLongPressed: true }, () => { this.state.isLongPressed = false });
+        this.setState({ isLongPressed: true })
+        this.fetchAddressFromLatLong(latlng.latitude, latlng.longitude)
+    }
 
+    fetchAddressFromLatLong = (lat, long) => {
+        console.log(`lat: ${lat} long: ${long}`)
+        var pos = {
+            lat: lat,
+            lng: long
+        };
+        Geocoder.geocodePosition(pos).then(res => {
+            console.log(`address:   ${res[0].formattedAddress}`);
+            this.setState({ address: res[0].formattedAddress, latlongTapped: pos })
+        })
+            .catch(error => alert(error));
+    }
+
+    createTableinDb = () => {
+
+        db.transaction((tx) => {
+            console.log('tx>>>>>>>>>>>>>   ' + JSON.stringify(tx));
+
+            tx.executeSql(
+                `CREATE TABLE IF NOT EXISTS ${TABLE_NAME}(id INTEGER PRIMARY KEY AUTOINCREMENT,title VARCHAR(25), description VARCHAR(25),latitude REAL(10),longitude REAL(10))`,
+                [],
+                (tx, res) => {
+                    if (res.rows.length === 0) {
+                        this.insertIntoTable();
+
+                    }
+                }
+            );
+        });
+    }
+
+    insertIntoTable = () => {
+        const { title, address, latlongTapped } = this.state;
+
+        db.transaction((tx) => {
+            tx.executeSql(
+                `INSERT INTO ${TABLE_NAME}(title, description, latitude, longitude) VALUES (?,?,?,?)`, [title, address, latlongTapped.lat, latlongTapped.lng], function (tx, results) {
+                    console.log('Results', results.rowsAffected);
+                    if (results.rowsAffected > 0) {
+                        console.log(`Row Inserted successfully.`);
+
+                    } else {
+                        console.log('Failed' + JSON.stringify(results) + '   ' + JSON.stringify(tx));
+
+                    }
+                }
+            )
+        })
+    }
+
+    addMarker = () => {
+        const { title, address, latlongTapped } = this.state;
+
+        this.setState({
+            markers: [...this.state.markers, {
+                title: title,
+                description: address,
+                latlng: {
+                    latitude: latlongTapped.lat,
+                    longitude: latlongTapped.lng
+                }
+            }],
+            latlngs: [...this.state.latlngs, {
+                latitude: latlongTapped.lat,
+                longitude: latlongTapped.lng
+            }],
+            isLongPressed: false
+        })
+        this.createTableinDb();
+    }
+
+    fetchAllMarkers = () => {
+
+        db.transaction((tx) => {
+            tx.executeSql(`SELECT * FROM ${TABLE_NAME}`, [], (tx, res) => {
+                var markers = [];
+                var latlngs = [];
+                var latlng = {};
+
+                for (var i = 0; i < res.rows.length; i++) {
+
+                    let item = res.rows.item(i)
+                    const marker = { title: item.title, description: item.description, latlng: { latitude: item.latitude, longitude: item.longitude } }
+                    latlng = {
+                        latitude: item.latitude,
+                        longitude: item.longitude
+                    }
+                    markers.push(marker);
+                    latlngs.push(latlng)
+                }
+                this.setState({ markers: markers, latlngs: latlngs })
+              //  this.fitAllMarkers();
+            });
+
+        })
+
+    }
+
+
+    markersRender = () => {
+        const { markers } = this.state
+
+        console.log(`markers:   ${JSON.stringify(markers)}`);
+
+
+        return markers.map(marker => (
+            <Marker
+                ref={'marker'}
+                draggable
+                title={marker.title}
+                description={marker.description}
+                coordinate={marker.latlng}
+
+
+            //  onPress={() => this.fetchAddressFromLatLong(marker.coordinate.lat, marker.coordinate.lng)}
+            //   onDragEnd={(e) => this.setState({ region: e.nativeEvent.coordinate, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })}
+
+            >
+                <VectorIcon name={'star'} groupName={'AntDesign'} size={20} color={'#623456'} />
+
+            </Marker>
+        ));
     }
 
     render() {
-        const { isLongPressed } = this.state;
+        const { isLongPressed, address } = this.state;
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <MapView
@@ -123,11 +274,16 @@ class GoogleMaps extends React.Component {
                     style={styles.container}
                     followsUserLocation
                     showsMyLocationButton
+                    zoomControlEnabled
+
                     initialRegion={this.getMapRegion()}
                     showsUserLocation
                     region={this.getMapRegion()}
+
                     onLongPress={this.onMapLongPress}
-                />
+                >
+                    {this.markersRender()}
+                </MapView>
 
                 <Modal
                     isVisible={isLongPressed}
@@ -161,16 +317,20 @@ class GoogleMaps extends React.Component {
                             inputStyle={{ fontSize: 15 }}
                             inputContainerStyle={{ borderBottomWidth: 0 }}
                             placeholder={'Title'}
+                            onChangeText={(text) => this.setState({ title: text })}
                         />
                         <Input
                             containerStyle={{ width: '90%', height: 80, marginTop: 10, justifyContent: 'flex-start', borderRadius: 10, borderColor: '#24717B', borderWidth: 2, backgroundColor: 'white' }}
                             inputStyle={{ fontSize: 15 }}
                             inputContainerStyle={{ borderBottomWidth: 0 }}
+                            value={address}
+                            multiline
                             placeholder={'Description'}
+                            onChangeText={(text) => this.setState({ description: text })}
                         />
                         <TouchableOpacity
                             style={{ width: 80, height: 45, backgroundColor: '#24717B', marginTop: 10, borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}
-                            onPress={() => this.setState({ isLongPressed: false })}>
+                            onPress={this.addMarker}>
                             <Text style={{ color: 'white' }}>Save</Text>
                         </TouchableOpacity>
                     </View>

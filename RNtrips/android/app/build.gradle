@@ -143,7 +143,10 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-sqlite-storage')
+    implementation project(':react-native-geocoder')
     implementation project(':react-native-vector-icons')
+
     implementation project(':react-native-camera')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])

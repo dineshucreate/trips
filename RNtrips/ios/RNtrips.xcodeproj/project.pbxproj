@@ -60,6 +60,8 @@
 		D1D2E1D99DE34474B4717F9A /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27FF2B3E166A430DAA18413E /* SimpleLineIcons.ttf */; };
 		D3D09048F63D435996429EBF /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7BBB780D8D4B39B1F80E93 /* Zocial.ttf */; };
 		623A9E74100D441D89D00C4F /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9458B1CC71C340C7AA011300 /* libAirMaps.a */; };
+		C0F28D4E99A14929AB769BB6 /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB4D923760A429FBCB35C68 /* libRNGeocoder.a */; };
+		71151AF0F88B4D248EFDA3D9 /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA92103589A04E418E5EF8D6 /* libSQLite.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -392,6 +394,10 @@
 		7F7BBB780D8D4B39B1F80E93 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		B4B2569390B6436885B79406 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		9458B1CC71C340C7AA011300 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		E0B2C4210B4D43C59DBE71AC /* RNGeocoder.xcodeproj */ = {isa = PBXFileReference; name = "RNGeocoder.xcodeproj"; path = "../node_modules/react-native-geocoder/ios/RNGeocoder.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3FB4D923760A429FBCB35C68 /* libRNGeocoder.a */ = {isa = PBXFileReference; name = "libRNGeocoder.a"; path = "libRNGeocoder.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		17ECABA8ADC84ED6BBF996BF /* SQLite.xcodeproj */ = {isa = PBXFileReference; name = "SQLite.xcodeproj"; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		AA92103589A04E418E5EF8D6 /* libSQLite.a */ = {isa = PBXFileReference; name = "libSQLite.a"; path = "libSQLite.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +430,8 @@
 				4F88CCE933414F5083E110E5 /* libRNCamera.a in Frameworks */,
 				2C02B5D32E194B47A050E94E /* libRNVectorIcons.a in Frameworks */,
 				623A9E74100D441D89D00C4F /* libAirMaps.a in Frameworks */,
+				C0F28D4E99A14929AB769BB6 /* libRNGeocoder.a in Frameworks */,
+				71151AF0F88B4D248EFDA3D9 /* libSQLite.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,6 +627,8 @@
 				58233EAAA98A46EE9D95EF22 /* RNCamera.xcodeproj */,
 				7F88BBB96EB4437BB73648F9 /* RNVectorIcons.xcodeproj */,
 				B4B2569390B6436885B79406 /* AirMaps.xcodeproj */,
+				E0B2C4210B4D43C59DBE71AC /* RNGeocoder.xcodeproj */,
+				17ECABA8ADC84ED6BBF996BF /* SQLite.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1291,6 +1301,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1298,6 +1310,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-geocoder\ios\RNGeocoder",
+					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 				);
 			};
 			name = Debug;
@@ -1325,6 +1339,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1332,6 +1348,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-geocoder\ios\RNGeocoder",
+					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 				);
 			};
 			name = Release;
@@ -1358,6 +1376,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-geocoder\ios\RNGeocoder",
+					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 				);
 			};
 			name = Debug;
@@ -1383,6 +1403,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-geocoder\ios\RNGeocoder",
+					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 				);
 			};
 			name = Release;
@@ -1418,6 +1440,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1425,6 +1449,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-geocoder\ios\RNGeocoder",
+					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 				);
 			};
 			name = Debug;
@@ -1460,6 +1486,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1467,6 +1495,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-geocoder\ios\RNGeocoder",
+					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 				);
 			};
 			name = Release;
@@ -1501,6 +1531,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1508,6 +1540,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-geocoder\ios\RNGeocoder",
+					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 				);
 			};
 			name = Debug;
@@ -1542,6 +1576,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1549,6 +1585,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-geocoder\ios\RNGeocoder",
+					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 				);
 			};
 			name = Release;
